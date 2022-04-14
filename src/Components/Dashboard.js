@@ -5,7 +5,6 @@ import "./Dashboard.css";
 import { useState } from "react";
 
 const Dashboard = () => {
-  const [display, setDisplay] = useState(null);
   const [lists, setLists] = useState([
     {
       title: "My Home List",
@@ -50,9 +49,15 @@ const Dashboard = () => {
       ],
     },
   ]);
+  const [display, setDisplay] = useState("Lists");
+  const [isItemActive, setIsItemActive] = useState(lists[0].id || null);
 
-  const setDisplayHandler = (data) => {
-    setDisplay(data);
+  const setDisplayHandler = (itemTitle) => {
+    setDisplay(itemTitle);
+  };
+
+  const setItemDisplayHandler = (itemId) => {
+    setIsItemActive(itemId);
   };
 
   const addNewListHandler = (newItem) => {
@@ -68,6 +73,8 @@ const Dashboard = () => {
         setDisplay={setDisplayHandler}
         lists={lists}
         onAddNewList={addNewListHandler}
+        setItemDisplayHandler={setItemDisplayHandler}
+        isItemActive={isItemActive}
       />
       <MainDisplay display={display} items={lists} />
     </div>
