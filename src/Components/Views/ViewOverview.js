@@ -1,11 +1,12 @@
 import React from "react";
-import Card from "./Card";
+import OverviewCard from "./OverviewCard";
+
 import "./ViewOverview.css";
 const ViewOverview = (props) => {
   return (
     <div id="main-display-overview">
-      {props.items.slice(0, 3).map((item) => (
-        <Card key={item.id} title={item.title} todos={item.todos} />
+      {props.items.map((item) => (
+        <OverviewCard key={item.id} title={item.title} todos={item.todos} />
       ))}
     </div>
   );

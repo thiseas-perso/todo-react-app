@@ -17,10 +17,10 @@ const Navbar = (props) => {
       : setFolderIcon(images["folder.svg"]);
   };
 
-  const [isItemActive, setIsItemActive] = useState(null);
-  const handleItemChange = (data) => {
-    setIsItemActive(data);
-    props.onAddNewList(data);
+  const [isItemActive, setIsItemActive] = useState(props.lists[0].id || null);
+
+  const handleItemChange = (itemId) => {
+    setIsItemActive(itemId);
   };
 
   return (
@@ -42,8 +42,8 @@ const Navbar = (props) => {
         <ListItems
           items={props.lists}
           onAddNewList={props.onAddNewList}
-          handleChange={handleItemChange}
-          isActive={isItemActive}
+          handleItemChange={handleItemChange}
+          isItemActive={isItemActive}
         />
       )}
       <NavbarItem
