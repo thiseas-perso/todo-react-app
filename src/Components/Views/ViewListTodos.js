@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./ViewListTodos.css";
 import ListCardCtn from "./ListCardCtn";
 import NewTodoForm from "./NewTodoForm";
+import images from "../../Assets";
 
 const ViewListTodos = (props) => {
   // find selected list in props.items // looking for id
@@ -27,16 +28,25 @@ const ViewListTodos = (props) => {
   return (
     <ListCardCtn clicked={clicked}>
       {!clicked && (
-        <div className="list-card">
+        <React.Fragment>
           <h1>{foundList.title}</h1>
-          {foundList.todos.map((todo) => (
-            <div key={todo.id} className="list-card-line">
-              <p>{todo.title}</p>
-              <p>{todo.date.toLocaleString("en-US", options)}</p>
-            </div>
-          ))}
-          <button onClick={clickHandler}>Add New Todo</button>
-        </div>
+          <div className="list-card">
+            {foundList.todos.map((todo) => (
+              <div key={todo.id} className="list-card-line">
+                <p>{todo.title}</p>
+                <p>{todo.date.toLocaleString("en-US", options)}</p>
+              </div>
+            ))}
+          </div>
+
+          <span
+            className="material-icons"
+            onClick={clickHandler}
+            id="new-todo-btn"
+          >
+            add_circle
+          </span>
+        </React.Fragment>
       )}
       {clicked && (
         <NewTodoForm parentList={foundList} onSubmit={submitHandler} />

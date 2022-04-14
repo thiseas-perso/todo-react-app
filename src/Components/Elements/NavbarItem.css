@@ -11,15 +11,15 @@
 cursor: pointer;
 border: 1px solid hsl(0, 0%, 82%);
 border-radius: 0.5rem;
-background-color: hsl(172, 59%, 80%);
+background-color: #FFDDD2;
 }
 
 .nav-item:active{
-   background-color: hsl(172, 79%, 70%);
+   background-color: #E29578
 }
 
 .nav-item.active{
    border: 1px solid hsl(0, 0%, 82%);
    border-radius: 0.5rem;
-   background-color: hsl(172, 79%, 70%);
+   background-color: #E29578
 }

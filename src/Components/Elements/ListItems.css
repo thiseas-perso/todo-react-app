@@ -13,7 +13,7 @@ li{
 li:hover{
    cursor: pointer;
    border-radius: 0.5rem;
-   background-color: hsl(172, 59%, 80%);
+   background-color: #FFDDD2;
 }
 
 li:active{
@@ -21,7 +21,7 @@ li:active{
 }
 
 ul .active{
-   background-color: hsl(172, 79%, 80%);
+   background-color: #FFDDD2;
    border: none
 }
 
@@ -38,24 +38,6 @@ ul .active{
    align-items: flex-end;
 }
 
- button{
-   background: hsl(172, 79%, 70%);
-   box-shadow: none;
-   border:none;
-   border-radius: 0.5rem;
-   text-shadow: none;
-   font-weight: 900;
-   padding: 0.4rem 0.8rem;
-   width: fit-content
-}
-
-button:hover{
-   background: hsl(172, 79%, 60%);
-   cursor: pointer;
-}
-button:active{
-   background: hsl(172, 79%, 40%);
-}
 
 .list-ctn form input{
    width: 10ch;
@@ -65,4 +47,24 @@ button:active{
 }
 .list-ctn form label {
    font-size: 0.8rem;
+}
+
+.list-ctn button{
+   background: #006D77;
+   box-shadow: none;
+   border:none;
+   border-radius: 0.5rem;
+   text-shadow: none;
+   color: white;
+   font-weight: 600;
+   padding: 0.4rem 0.8rem;
+   width: fit-content
+}
+
+.list-ctn button:hover{
+   background: #83C5BE;
+   cursor: pointer;
+}
+.list-ctn button:active{
+   background: #83C5BE
 }
