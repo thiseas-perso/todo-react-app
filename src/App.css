@@ -5,3 +5,22 @@ width: 100vw;
 display: flex;
 justify-content: center;
 }
+
+button{
+   background: hsl(172, 79%, 70%);
+   box-shadow: none;
+   border:none;
+   border-radius: 0.5rem;
+   text-shadow: none;
+   font-weight: 900;
+   padding: 0.4rem 0.8rem;
+   width: fit-content
+}
+
+button:hover{
+   background: hsl(172, 79%, 60%);
+   cursor: pointer;
+}
+button:active{
+   background: hsl(172, 79%, 40%);
+}

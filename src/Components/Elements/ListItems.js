@@ -1,32 +1,22 @@
 import React, { useState } from "react";
 import "./ListItems.css";
-
+import NewListForm from "../Views/NewListForm";
 import ListItem from "./ListItem";
 
 const ListItems = (props) => {
-  const [inputValue, setInputValue] = useState("");
-
-  const titleChangeHandler = (e) => {
-    setInputValue(e.target.value);
-  };
-
   const handleItemChange = (itemId) => {
     props.handleItemChange(itemId);
   };
 
-  const submitHandler = (e) => {
-    e.preventDefault();
+  const [clicked, setClicked] = useState(false);
+  const clickHandler = () => {
+    setClicked(!clicked);
+  };
 
-    if (inputValue.length) {
-      const newItem = {
-        title: inputValue,
-        id: Math.random(),
-        todos: [],
-      };
-      props.onAddNewList(newItem);
-      props.handleItemChange(newItem.id);
-    }
-    setInputValue("");
+  const addNewListHandler = (newList) => {
+    setClicked(!clicked);
+    props.onAddNewList(newList);
+    props.handleItemChange(newList.id);
   };
 
   return (
@@ -42,17 +32,8 @@ const ListItems = (props) => {
           />
         ))}
       </ul>
-      <form onSubmit={submitHandler}>
-        <input
-          value={inputValue}
-          id="add-new-list"
-          maxLength={15}
-          placeholder="Add New List"
-          onChange={titleChangeHandler}
-          required
-        />
-        <button type="submit">+</button>
-      </form>
+      {!clicked && <button onClick={clickHandler}>Add New List</button>}
+      {clicked && <NewListForm onAddNewList={addNewListHandler} />}
     </div>
   );
 };
