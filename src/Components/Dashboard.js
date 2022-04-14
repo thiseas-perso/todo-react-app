@@ -5,7 +5,6 @@ import "./Dashboard.css";
 import { useState } from "react";
 
 const Dashboard = () => {
-  const [display, setDisplay] = useState(null);
   const [lists, setLists] = useState([
     {
       title: "My Home List",
@@ -23,6 +22,12 @@ const Dashboard = () => {
           priority: 1,
           id: "a2",
         },
+        {
+          title: "Feed fish",
+          date: new Date(2022, 4, 5),
+          priority: 1,
+          id: "a3",
+        },
       ],
     },
     {
@@ -36,7 +41,7 @@ const Dashboard = () => {
           id: "b1",
         },
         {
-          title: "Feed cat",
+          title: "Meeting",
           date: new Date(2022, 4, 9),
           priority: 2,
           id: "b2",
@@ -44,9 +49,16 @@ const Dashboard = () => {
       ],
     },
   ]);
+  const [display, setDisplay] = useState("Lists");
+  const [isItemActive, setIsItemActive] = useState(lists[0].id || null);
 
-  const setDisplayHandler = (data) => {
-    setDisplay(data);
+  const setDisplayHandler = (itemTitle) => {
+    setDisplay(itemTitle);
+  };
+
+  const setItemDisplayHandler = (itemId) => {
+    setIsItemActive(itemId);
+    // console.log(itemId);
   };
 
   const addNewListHandler = (newItem) => {
@@ -62,8 +74,14 @@ const Dashboard = () => {
         setDisplay={setDisplayHandler}
         lists={lists}
         onAddNewList={addNewListHandler}
+        setItemDisplayHandler={setItemDisplayHandler}
+        isItemActive={isItemActive}
       />
-      <MainDisplay display={display} />
+      <MainDisplay
+        display={display}
+        isItemActive={isItemActive}
+        items={lists}
+      />
     </div>
   );
 };

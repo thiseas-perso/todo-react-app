@@ -10,10 +10,8 @@ const ListItems = (props) => {
     setInputValue(e.target.value);
   };
 
-  const [isItemActive, setIsItemActive] = useState(props.items[0].id || null);
-
   const handleItemChange = (itemId) => {
-    setIsItemActive(itemId);
+    props.handleItemChange(itemId);
   };
 
   const submitHandler = (e) => {
@@ -26,7 +24,7 @@ const ListItems = (props) => {
         todos: [],
       };
       props.onAddNewList(newItem);
-      setIsItemActive(newItem.id);
+      props.handleItemChange(newItem.id);
     }
     setInputValue("");
   };
@@ -40,7 +38,7 @@ const ListItems = (props) => {
             id={item.id}
             title={item.title}
             handleItemChange={handleItemChange}
-            isItemActive={isItemActive}
+            isItemActive={props.isItemActive}
           />
         ))}
       </ul>

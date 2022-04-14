@@ -9,17 +9,17 @@
 
 .nav-item:hover{
 cursor: pointer;
-border: 1px solid black;
+border: 1px solid hsl(0, 0%, 82%);
 border-radius: 0.5rem;
-background-color: hsl(171, 16%, 91%)
+background-color: hsl(172, 59%, 80%);
 }
 
 .nav-item:active{
-   background-color: hsl(171, 28%, 85%)
+   background-color: hsl(172, 79%, 70%);
 }
 
 .nav-item.active{
-   border: 1px solid black;
+   border: 1px solid hsl(0, 0%, 82%);
    border-radius: 0.5rem;
-   background-color: hsl(171, 28%, 85%)
+   background-color: hsl(172, 79%, 70%);
 }
