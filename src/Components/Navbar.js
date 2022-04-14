@@ -25,7 +25,7 @@ const Navbar = (props) => {
 
   return (
     <nav id="navbar">
-      <h1>ToDos</h1>
+      <h2 id="app-name">ToDos</h2>
       <NavbarItem
         title={"Overview"}
         img={images["home.svg"]}

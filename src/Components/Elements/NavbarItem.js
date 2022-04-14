@@ -14,7 +14,7 @@ const NavbarItem = (props) => {
       onClick={clickHandler}
     >
       <img src={props.img} alt="" />
-      <h2>{props.title}</h2>
+      <h2 className="nav-title">{props.title}</h2>
     </div>
   );
 };

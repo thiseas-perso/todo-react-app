@@ -1,4 +1,4 @@
-h2{
+.nav-title{
    font-size: 1rem;
    font-weight: 400;
    margin: 0;
@@ -13,6 +13,8 @@ h2{
    grid-gap: 1.5rem;
 }
 
-h1{
+#app-name{
+   font-size: 1.5rem;
+   font-weight: 900;
    grid-area: 1 / 1 / 1 / 2 ;
 }

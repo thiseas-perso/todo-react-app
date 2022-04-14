@@ -23,6 +23,12 @@ const Dashboard = () => {
           priority: 1,
           id: "a2",
         },
+        {
+          title: "Feed fish",
+          date: new Date(2022, 4, 5),
+          priority: 1,
+          id: "a3",
+        },
       ],
     },
     {
@@ -36,7 +42,7 @@ const Dashboard = () => {
           id: "b1",
         },
         {
-          title: "Feed cat",
+          title: "Meeting",
           date: new Date(2022, 4, 9),
           priority: 2,
           id: "b2",
@@ -63,7 +69,7 @@ const Dashboard = () => {
         lists={lists}
         onAddNewList={addNewListHandler}
       />
-      <MainDisplay display={display} />
+      <MainDisplay display={display} items={lists} />
     </div>
   );
 };
