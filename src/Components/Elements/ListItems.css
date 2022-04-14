@@ -28,35 +28,40 @@ ul .active{
 .list-ctn{
    display: flex;
    flex-direction: column;
-   align-items: center;
+   align-items: flex-end;
 }
 
 .list-ctn form{
    display: flex;
+   flex-direction: column;
    gap: 0.5rem;
+   align-items: flex-end;
 }
 
-.list-ctn form button{
+ button{
    background: hsl(172, 79%, 70%);
    box-shadow: none;
    border:none;
    border-radius: 0.5rem;
    text-shadow: none;
    font-weight: 900;
-   padding: 0.2rem;
-   width: 2rem;
+   padding: 0.4rem 0.8rem;
+   width: fit-content
 }
 
-.list-ctn form button:hover{
+button:hover{
    background: hsl(172, 79%, 60%);
    cursor: pointer;
+}
+button:active{
+   background: hsl(172, 79%, 40%);
 }
 
 .list-ctn form input{
    width: 10ch;
    border: 1px solid black;
    border-radius: 0.5rem;
-   line-height: 1.2rem;
+   line-height: 1.5rem;
 }
 .list-ctn form label {
    font-size: 0.8rem;
