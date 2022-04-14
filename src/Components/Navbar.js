@@ -3,7 +3,7 @@ import { useState } from "react";
 import "./Navbar.css";
 import NavbarItem from "./Elements/NavbarItem";
 import ListItems from "./Elements/ListItems";
-import images from "../../Assets";
+import images from "../Assets";
 
 const Navbar = (props) => {
   const [isActive, setIsActive] = useState("Lists");
