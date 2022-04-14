@@ -30,6 +30,7 @@ const NewListForm = (props) => {
         placeholder="Add New List"
         onChange={titleChangeHandler}
         required
+        autoFocus
       />
       <button type="submit">Submit</button>
     </form>

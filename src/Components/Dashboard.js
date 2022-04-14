@@ -58,7 +58,6 @@ const Dashboard = () => {
 
   const setItemDisplayHandler = (itemId) => {
     setIsItemActive(itemId);
-    // console.log(itemId);
   };
 
   const addNewListHandler = (newItem) => {
@@ -70,7 +69,7 @@ const Dashboard = () => {
   const addNewTodoHandler = (incomingTodo) => {
     const newTodo = {
       title: incomingTodo.title,
-      date: incomingTodo.date,
+      date: new Date(incomingTodo.date),
       id: incomingTodo.id,
     };
     setLists((prevState) => {

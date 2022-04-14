@@ -35,6 +35,7 @@ const NewTodoForm = (props) => {
           type="text"
           onChange={titleChangeHandler}
           value={titleInput}
+          required
         />
         <label htmlFor="title">Date</label>
         <input
@@ -42,6 +43,7 @@ const NewTodoForm = (props) => {
           type="date"
           onChange={dateChangeHandler}
           value={dateInput}
+          required
         />
         <button>Submit</button>
       </form>
