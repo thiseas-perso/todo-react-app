@@ -6,3 +6,7 @@ display: flex;
 justify-content: center;
 }
 
+.date{
+   font-size: 0.9rem;
+   font-weight: bold;
+}

@@ -16,7 +16,7 @@ const OverviewCard = (props) => {
         props.todos.slice(0, 3).map((todo) => (
           <div key={todo.id} className={"card-details"}>
             <p>{todo.title}</p>
-            <p>{todo.date.toLocaleString("en-US", options)}</p>
+            <p className="date">{todo.date.toLocaleString("en-US", options)}</p>
           </div>
         ))}
     </div>

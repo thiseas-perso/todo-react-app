@@ -1,4 +1,5 @@
 import { useState } from "react";
+import "./NewTodoForm.css";
 
 const NewTodoForm = (props) => {
   const [titleInput, setTitleInput] = useState("");
@@ -25,23 +26,26 @@ const NewTodoForm = (props) => {
   };
 
   return (
-    <form onSubmit={submitHandler}>
-      <label htmlFor="title">Title</label>
-      <input
-        id="title"
-        type="text"
-        onChange={titleChangeHandler}
-        value={titleInput}
-      />
-      <label htmlFor="title">Date</label>
-      <input
-        id="date"
-        type="date"
-        onChange={dateChangeHandler}
-        value={dateInput}
-      />
-      <button>Submit</button>
-    </form>
+    <div id="new-todo-form-ctn">
+      <p id="parent-list-title">Adding to: {props.parentList.title}</p>
+      <form id="new-todo-form" onSubmit={submitHandler}>
+        <label htmlFor="title">Title</label>
+        <input
+          id="title"
+          type="text"
+          onChange={titleChangeHandler}
+          value={titleInput}
+        />
+        <label htmlFor="title">Date</label>
+        <input
+          id="date"
+          type="date"
+          onChange={dateChangeHandler}
+          value={dateInput}
+        />
+        <button>Submit</button>
+      </form>
+    </div>
   );
 };
 
