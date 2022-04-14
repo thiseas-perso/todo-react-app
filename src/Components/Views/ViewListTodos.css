@@ -1,0 +1,25 @@
+
+.list-card-line{
+   display: flex;
+   gap: 2rem;
+   /* border: 2px solid rgb(219, 219, 219); */
+   /* max-width: fit-content; */
+   /* justify-content: space-between; */
+}
+
+.list-card-ctn{
+   /* display: flex; */
+   margin-left: 2rem;
+}
+
+.list-card-line p {
+   margin-bottom: 0;
+   margin-top: 1rem;
+}
+
+.list-card h1{
+   margin: 0  0 2rem -2rem;
+   padding-left: 2rem;
+   padding-top: 2rem;
+   background-color: hsl(172, 79%, 70%)
+}

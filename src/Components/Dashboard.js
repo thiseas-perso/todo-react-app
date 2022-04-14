@@ -58,6 +58,7 @@ const Dashboard = () => {
 
   const setItemDisplayHandler = (itemId) => {
     setIsItemActive(itemId);
+    // console.log(itemId);
   };
 
   const addNewListHandler = (newItem) => {
@@ -76,7 +77,11 @@ const Dashboard = () => {
         setItemDisplayHandler={setItemDisplayHandler}
         isItemActive={isItemActive}
       />
-      <MainDisplay display={display} items={lists} />
+      <MainDisplay
+        display={display}
+        isItemActive={isItemActive}
+        items={lists}
+      />
     </div>
   );
 };
