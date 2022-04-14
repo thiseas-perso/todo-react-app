@@ -1,0 +1,13 @@
+#dashboard{
+width: 80vw;
+display: grid;
+grid-template-columns: max-content 1fr;
+margin: 3rem;
+border-radius: 1.5rem;
+overflow: hidden;
+}
+
+.active{
+   border: 1px solid black;
+   border-radius: 0.5rem;
+}
