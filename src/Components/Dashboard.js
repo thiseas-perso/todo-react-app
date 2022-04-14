@@ -62,9 +62,24 @@ const Dashboard = () => {
   };
 
   const addNewListHandler = (newItem) => {
-    console.log(newItem);
     setLists((prevState) => {
       return [...prevState, newItem];
+    });
+  };
+
+  const addNewTodoHandler = (incomingTodo) => {
+    const newTodo = {
+      title: incomingTodo.title,
+      date: incomingTodo.date,
+      id: incomingTodo.id,
+    };
+    setLists((prevState) => {
+      let newArr = [...prevState];
+      let listToBeUpdated = newArr.find(
+        (list) => list.id === incomingTodo.parentListId
+      );
+      listToBeUpdated.todos.push(newTodo);
+      return [...newArr];
     });
   };
 
@@ -81,6 +96,7 @@ const Dashboard = () => {
         display={display}
         isItemActive={isItemActive}
         items={lists}
+        onAddNewTodo={addNewTodoHandler}
       />
     </div>
   );
