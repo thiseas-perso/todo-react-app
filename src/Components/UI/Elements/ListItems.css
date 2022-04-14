@@ -1,0 +1,63 @@
+ul{
+   list-style: none;
+   padding: 0;
+   margin: 0;
+}
+
+li{
+   margin-bottom: 1rem;
+   padding: 0.2rem 0.4rem;
+   transition: all 100ms ease-in;
+}
+
+li:hover{
+   cursor: pointer;
+   border-radius: 0.5rem;
+   background-color: hsl(171, 19%, 85%)
+}
+
+li:active{
+   background-color: hsl(171, 31%, 80%)
+}
+
+ul .active{
+   background-color: hsl(171, 31%, 90%);
+   border: none
+}
+
+.list-ctn{
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+}
+
+.list-ctn form{
+   display: flex;
+   gap: 0.5rem;
+}
+
+.list-ctn form button{
+   background: hsl(152, 40%, 70%);
+   box-shadow: none;
+   border:none;
+   border-radius: 0.5rem;
+   text-shadow: none;
+   font-weight: 900;
+   padding: 0.2rem;
+   width: 2rem;
+}
+
+.list-ctn form button:hover{
+   background: hsl(152, 40%, 60%);
+   cursor: pointer;
+}
+
+.list-ctn form input{
+   width: 10ch;
+   border: 1px solid black;
+   border-radius: 0.5rem;
+   line-height: 1.2rem;
+}
+.list-ctn form label {
+   font-size: 0.8rem;
+}
