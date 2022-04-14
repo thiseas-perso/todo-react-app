@@ -1,0 +1,32 @@
+#new-todo-form{
+   display: flex;
+   flex-direction: column;
+   width: 250px;
+  margin-bottom: 2rem;
+  background-color: white;
+  padding: 2rem;
+  border-radius: 1rem;
+}
+
+#new-todo-form button{
+   max-width: fit-content;
+}
+
+#new-todo-form-ctn{
+background-color: rgb(91, 91, 91);
+height: 100%;
+margin-left: -2rem;
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+}
+
+#parent-list-title{
+   margin: 0;
+   margin-bottom: 1rem;
+   padding: 0;
+   background-color: transparent;
+   font-weight: 900;
+   color: white;
+}

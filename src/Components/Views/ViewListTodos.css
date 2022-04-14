@@ -1,15 +1,18 @@
 
 .list-card-line{
-   display: flex;
+   display: grid;
+   grid-template-columns: 1fr 1fr;
    gap: 2rem;
-   /* border: 2px solid rgb(219, 219, 219); */
-   /* max-width: fit-content; */
-   /* justify-content: space-between; */
+   align-items: baseline;
+   border-bottom: 2px solid rgb(219, 219, 219);
+   
 }
 
 .list-card-ctn{
-   /* display: flex; */
+   height: 100%;
+   display: flex;
    margin-left: 2rem;
+   flex-direction: column;
 }
 
 .list-card-line p {
@@ -17,9 +20,31 @@
    margin-top: 1rem;
 }
 
-.list-card h1{
+.list-card-ctn h1{
    margin: 0  0 2rem -2rem;
    padding-left: 2rem;
    padding-top: 2rem;
-   background-color: hsl(172, 79%, 70%)
+   padding-bottom: 1rem;
+   background-color: #83C5BE
+}
+
+#new-todo-btn{
+font-size: 4rem;
+align-self: flex-end;
+margin-top: 2rem;
+margin-top: auto;
+margin-bottom: 2rem;
+margin-right: 2rem;
+color: #006D77;
+}
+
+#new-todo-btn:hover{
+   color: #83C5BE;
+   cursor: pointer;
+}
+
+.list-card{
+   display: flex;
+   flex-direction: column;
+   max-width: fit-content;
 }
