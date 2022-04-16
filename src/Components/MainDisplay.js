@@ -2,6 +2,7 @@ import "./MainDisplay.css";
 
 import ViewOverview from "./Views/ViewOverview";
 import ViewListTodos from "./Views/ViewListTodos";
+import Modal from "./Layouts/Modal";
 
 const MainDisplay = (props) => {
   const addNewTodoHandler = (newTodo) => {
@@ -10,6 +11,7 @@ const MainDisplay = (props) => {
 
   return (
     <div id="main-display">
+      {props.openModal && <Modal>hello</Modal>}
       {props.display === "Overview" && <ViewOverview items={props.items} />}
       {props.display === "Lists" && (
         <ViewListTodos

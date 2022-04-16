@@ -1,3 +1,14 @@
 #main-display{
    background-color: hsl(0, 0%, 98%);
+   position: relative;
+}
+
+#modal{
+   position: absolute;
+   height: 100%;
+   width: 100%;
+   background-color: rgba(0,0,0,0.2);
+   display: flex;
+   justify-content: center;
+   align-items: center;
 }

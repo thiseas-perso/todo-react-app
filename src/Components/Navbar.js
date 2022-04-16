@@ -42,6 +42,8 @@ const Navbar = (props) => {
           onAddNewList={props.onAddNewList}
           handleItemChange={handleItemChange}
           isItemActive={props.isItemActive}
+          setOpenModal={props.setOpenModal}
+          openModal={props.openModal}
         />
       )}
       <NavbarItem

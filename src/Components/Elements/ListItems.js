@@ -9,8 +9,9 @@ const ListItems = (props) => {
   };
 
   const [clicked, setClicked] = useState(false);
+
   const clickHandler = () => {
-    setClicked(!clicked);
+    props.setOpenModal(!props.openModal);
   };
 
   const addNewListHandler = (newList) => {
@@ -32,8 +33,7 @@ const ListItems = (props) => {
           />
         ))}
       </ul>
-      {!clicked && <button onClick={clickHandler}>Add New List</button>}
-      {clicked && <NewListForm onAddNewList={addNewListHandler} />}
+      <button onClick={clickHandler}>Add New List</button>
     </div>
   );
 };

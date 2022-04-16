@@ -49,9 +49,11 @@ const Dashboard = () => {
       ],
     },
   ]);
+
   const [display, setDisplay] = useState("Lists");
   const [isItemActive, setIsItemActive] = useState(lists[0].id || null);
-
+  const [openModal, setOpenModal] = useState(false);
+  console.log(openModal);
   const setDisplayHandler = (itemTitle) => {
     setDisplay(itemTitle);
   };
@@ -90,12 +92,15 @@ const Dashboard = () => {
         onAddNewList={addNewListHandler}
         setItemDisplayHandler={setItemDisplayHandler}
         isItemActive={isItemActive}
+        setOpenModal={setOpenModal}
+        openModal={openModal}
       />
       <MainDisplay
         display={display}
         isItemActive={isItemActive}
         items={lists}
         onAddNewTodo={addNewTodoHandler}
+        openModal={openModal}
       />
     </div>
   );
