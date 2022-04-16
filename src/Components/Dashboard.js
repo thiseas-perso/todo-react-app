@@ -69,7 +69,6 @@ const Dashboard = () => {
     });
     setOpenModal(false);
     setIsItemActive(newItem.id);
-    console.log({ lists });
   };
 
   const addNewTodoHandler = (incomingTodo) => {
