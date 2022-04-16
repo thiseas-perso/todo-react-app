@@ -1,29 +1,40 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import "./NewTodoForm.css";
 
 const NewTodoForm = (props) => {
-  const [titleInput, setTitleInput] = useState("");
-  const [dateInput, setDateInput] = useState("");
+  //destructure props here
+  // const [titleInput, setTitleInput] = useState("");
+  // const [dateInput, setDateInput] = useState("");
+
+  const titleInputRef = useRef();
+  const dateInputRef = useRef();
 
   const submitHandler = (e) => {
     e.preventDefault();
+    const enteredInput = titleInputRef.current.value; // Refs should only be used for **reading** values
+    const enteredDate = dateInputRef.current.value; // Refs should only be used for **reading** values
+    if (enteredInput.trim().length < 1) {
+      return;
+    }
     const newTodo = {
-      title: titleInput,
-      date: dateInput,
-      id: Math.random(),
+      title: enteredInput.trim(),
+      date: enteredDate,
+      id: Math.random(), //use uuid for random IDs
       parentListId: props.parentList.id,
     };
     props.onSubmit(newTodo);
-    setDateInput("");
-    setTitleInput("");
+    titleInputRef.current.value = ""; //  Refs should only be used for **reading** values
+    dateInputRef.current.value = ""; // exceptionally here it's okay since we are NOT manipulating the DOM
+    // setDateInput("");
+    // setTitleInput("");
   };
 
-  const titleChangeHandler = (e) => {
+  /*   const titleChangeHandler = (e) => {
     setTitleInput(e.target.value);
   };
   const dateChangeHandler = (e) => {
     setDateInput(e.target.value);
-  };
+  }; */
 
   return (
     <div id="new-todo-form-ctn">
@@ -33,17 +44,19 @@ const NewTodoForm = (props) => {
         <input
           id="title"
           type="text"
-          onChange={titleChangeHandler}
-          value={titleInput}
+          // onChange={titleChangeHandler}
+          // value={titleInput}
           required
+          ref={titleInputRef}
         />
         <label htmlFor="title">Date</label>
         <input
           id="date"
           type="date"
-          onChange={dateChangeHandler}
-          value={dateInput}
+          // onChange={dateChangeHandler} //onChange={(e)=>setDateInput(e.target.value)}
+          // value={dateInput}
           required
+          ref={dateInputRef}
         />
         <button>Submit</button>
       </form>
