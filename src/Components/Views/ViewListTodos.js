@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import "./ViewListTodos.css";
 import ListCardCtn from "./ListCardCtn";
 import NewTodoForm from "./NewTodoForm";
-import images from "../../Assets";
 
 const ViewListTodos = (props) => {
   // find selected list in props.items // looking for id

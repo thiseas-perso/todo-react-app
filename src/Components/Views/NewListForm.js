@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 
 const NewListForm = (props) => {
+  const [inputValue, setInputValue] = useState("");
+
   const submitHandler = (e) => {
     e.preventDefault();
     if (inputValue.length) {
@@ -10,7 +12,6 @@ const NewListForm = (props) => {
         todos: [],
       };
       props.onAddNewList(newItem);
-      // props.handleItemChange(newItem.id);
     }
     setInputValue("");
   };
@@ -18,8 +19,6 @@ const NewListForm = (props) => {
   const titleChangeHandler = (e) => {
     setInputValue(e.target.value);
   };
-
-  const [inputValue, setInputValue] = useState("");
 
   return (
     <form onSubmit={submitHandler}>
