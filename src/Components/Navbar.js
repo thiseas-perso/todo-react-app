@@ -39,7 +39,6 @@ const Navbar = (props) => {
       {isActive === "Lists" && props.lists.length > 0 && (
         <ListItems
           items={props.lists}
-          onAddNewList={props.onAddNewList}
           handleItemChange={handleItemChange}
           isItemActive={props.isItemActive}
           setOpenModal={props.setOpenModal}

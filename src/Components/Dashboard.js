@@ -53,7 +53,7 @@ const Dashboard = () => {
   const [display, setDisplay] = useState("Lists");
   const [isItemActive, setIsItemActive] = useState(lists[0].id || null);
   const [openModal, setOpenModal] = useState(false);
-  console.log(openModal);
+
   const setDisplayHandler = (itemTitle) => {
     setDisplay(itemTitle);
   };
@@ -63,9 +63,13 @@ const Dashboard = () => {
   };
 
   const addNewListHandler = (newItem) => {
+    console.log({ newItem });
     setLists((prevState) => {
       return [...prevState, newItem];
     });
+    setOpenModal(false);
+    setIsItemActive(newItem.id);
+    console.log({ lists });
   };
 
   const addNewTodoHandler = (incomingTodo) => {
@@ -89,7 +93,6 @@ const Dashboard = () => {
       <Navbar
         setDisplay={setDisplayHandler}
         lists={lists}
-        onAddNewList={addNewListHandler}
         setItemDisplayHandler={setItemDisplayHandler}
         isItemActive={isItemActive}
         setOpenModal={setOpenModal}
@@ -101,6 +104,7 @@ const Dashboard = () => {
         items={lists}
         onAddNewTodo={addNewTodoHandler}
         openModal={openModal}
+        onAddNewList={addNewListHandler}
       />
     </div>
   );

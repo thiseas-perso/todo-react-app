@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./ListItems.css";
-import NewListForm from "../Views/NewListForm";
+
 import ListItem from "./ListItem";
 
 const ListItems = (props) => {
@@ -8,16 +8,8 @@ const ListItems = (props) => {
     props.handleItemChange(itemId);
   };
 
-  const [clicked, setClicked] = useState(false);
-
-  const clickHandler = () => {
+  const dispalaFormHandler = () => {
     props.setOpenModal(!props.openModal);
-  };
-
-  const addNewListHandler = (newList) => {
-    setClicked(!clicked);
-    props.onAddNewList(newList);
-    props.handleItemChange(newList.id);
   };
 
   return (
@@ -33,7 +25,7 @@ const ListItems = (props) => {
           />
         ))}
       </ul>
-      <button onClick={clickHandler}>Add New List</button>
+      <button onClick={dispalaFormHandler}>Add New List</button>
     </div>
   );
 };
