@@ -103,6 +103,7 @@ const Dashboard = () => {
         items={lists}
         onAddNewTodo={addNewTodoHandler}
         openModal={openModal}
+        setOpenModal={setOpenModal}
         onAddNewList={addNewListHandler}
       />
     </div>
