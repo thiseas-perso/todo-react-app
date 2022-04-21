@@ -52,7 +52,14 @@ const ViewListTodos = (props) => {
         </React.Fragment>
       )}
       {clicked && (
-        <NewTodoForm parentList={foundList} onSubmit={submitHandler} />
+        <NewTodoForm
+          show={clicked}
+          onClickOutside={() => {
+            setClicked(false);
+          }}
+          parentList={foundList}
+          onSubmit={submitHandler}
+        />
       )}
     </ListCardCtn>
   );

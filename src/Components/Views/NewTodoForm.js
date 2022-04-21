@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import "./NewTodoForm.css";
 
 const NewTodoForm = (props) => {
@@ -25,8 +25,24 @@ const NewTodoForm = (props) => {
     setDateInput(e.target.value);
   };
 
+  const { onClickOutside } = props;
+  const ref = useRef(null);
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (ref.current && !ref.current.contains(event.target)) {
+        onClickOutside && onClickOutside();
+      }
+    };
+    document.addEventListener("click", handleClickOutside, true);
+    return () => {
+      document.removeEventListener("click", handleClickOutside, true);
+    };
+  }, [onClickOutside]);
+
+  if (!props.show) return null;
+
   return (
-    <div id="new-todo-form-ctn">
+    <div ref={ref} id="new-todo-form-ctn">
       <p id="parent-list-title">Adding to: {props.parentList.title}</p>
       <form id="new-todo-form" onSubmit={submitHandler}>
         <label htmlFor="title">Title</label>
