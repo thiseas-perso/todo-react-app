@@ -13,7 +13,10 @@ const MainDisplay = (props) => {
   return (
     <div id="main-display">
       {props.openModal && (
-        <Modal>
+        <Modal
+          openModal={props.openModal}
+          onClickOutside={() => props.setOpenModal(false)}
+        >
           <NewListForm onAddNewList={props.onAddNewList} />
         </Modal>
       )}
