@@ -27,6 +27,7 @@ const NewTodoForm = (props) => {
     });
     titleInputRef.current.value = "";
     dateInputRef.current.value = "";
+    props.display();
   };
 
   const { onClickOutside } = props;
@@ -42,8 +43,6 @@ const NewTodoForm = (props) => {
       document.removeEventListener("click", handleClickOutside, true);
     };
   }, [onClickOutside]);
-
-  if (!props.show) return null;
 
   return (
     <div ref={ref} id="new-todo-form-ctn">

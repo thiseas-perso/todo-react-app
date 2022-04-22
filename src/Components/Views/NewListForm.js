@@ -3,20 +3,24 @@ import { DashboardContext } from "../../store/dashboard-context";
 import { v4 as uuid } from "uuid";
 
 const NewListForm = () => {
-  const { listsDispatch } = useContext(DashboardContext);
+  const { listsDispatch, setOpenModal, setIsActiveListHandler } =
+    useContext(DashboardContext);
   const [title, setTitle] = useState("");
 
   const submitHandler = (e) => {
     e.preventDefault();
     if (title.trim().length > 0) {
+      setOpenModal((prev) => !prev);
+      let id = uuid();
       listsDispatch({
         type: "ADD_LIST",
         list: {
           title,
-          id: uuid(),
+          id,
           todos: [],
         },
       });
+      setIsActiveListHandler(id);
     }
     setTitle("");
   };

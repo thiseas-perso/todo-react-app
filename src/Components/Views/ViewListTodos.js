@@ -51,7 +51,7 @@ const ViewListTodos = (props) => {
       )}
       {clicked && (
         <NewTodoForm
-          show={clicked}
+          display={clickHandler}
           onClickOutside={() => {
             setClicked(false);
           }}

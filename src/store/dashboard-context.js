@@ -1,4 +1,5 @@
 import React, { createContext, useReducer, useState } from "react";
+import { listsReducer } from "./listReducer";
 
 export const DashboardContext = createContext();
 
@@ -48,43 +49,12 @@ const DUMMY_DATA = [
 ];
 
 const DashboardContextProvider = (props) => {
-  const listsReducer = (state, action) => {
-    switch (action.type) {
-      case "ADD_LIST":
-        // setOpenModal(false);
-        // setIsActiveList(action.list.id);
-        return [
-          ...state,
-          {
-            title: action.list.title,
-            id: action.list.id,
-            todos: action.list.todos,
-          },
-        ];
-      case "ADD_TODO":
-        const newTodo = {
-          title: action.todo.title,
-          date: action.todo.date,
-          id: action.todo.id,
-          parentListId: action.todo.parentListId,
-        };
-        const newArr = [...state];
-        const listToBeUpdated = newArr.find(
-          (list) => list.id === action.todo.parentListId
-        );
-        listToBeUpdated.todos.push(newTodo);
-        return [...newArr];
-      default:
-        return state;
-    }
-  };
-  const [lists, listsDispatch] = useReducer(listsReducer, DUMMY_DATA);
-
-  const [display, setDisplay] = useState("Lists");
-
-  const [isActiveList, setIsActiveList] = useState(lists[0].id || null);
-
   const [openModal, setOpenModal] = useState(false);
+  const [lists, listsDispatch] = useReducer(listsReducer, [], () => [
+    ...DUMMY_DATA,
+  ]);
+  const [isActiveList, setIsActiveList] = useState(lists[0].id || null);
+  const [display, setDisplay] = useState("Lists");
 
   const setDisplayHandler = (listTitle) => {
     setDisplay(listTitle);
@@ -97,7 +67,7 @@ const DashboardContextProvider = (props) => {
   const addNewListHandler = () => {
     setOpenModal((prev) => !prev);
   };
-
+  console.log(lists);
   return (
     <DashboardContext.Provider
       value={{
