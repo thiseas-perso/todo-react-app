@@ -1,43 +1,34 @@
-import { useState, useEffect, useRef } from "react";
-
-
-
+import { useEffect, useRef, useContext } from "react";
+import { v4 as uuid } from "uuid";
+import { DashboardContext } from "../../store/dashboard-context";
 import "./NewTodoForm.css";
 
 const NewTodoForm = (props) => {
-  //destructure props here
-  // const [titleInput, setTitleInput] = useState("");
-  // const [dateInput, setDateInput] = useState("");
+  const { listsDispatch } = useContext(DashboardContext);
 
   const titleInputRef = useRef();
   const dateInputRef = useRef();
 
   const submitHandler = (e) => {
     e.preventDefault();
-    const enteredInput = titleInputRef.current.value; // Refs should only be used for **reading** values
-    const enteredDate = dateInputRef.current.value; // Refs should only be used for **reading** values
-    if (enteredInput.trim().length < 1) {
+    const title = titleInputRef.current.value;
+    const date = dateInputRef.current.value;
+    if (title.trim().length < 1) {
       return;
     }
-    const newTodo = {
-      title: enteredInput.trim(),
-      date: enteredDate,
-      id: Math.random(), //use uuid for random IDs
-      parentListId: props.parentList.id,
-    };
-    props.onSubmit(newTodo);
-    titleInputRef.current.value = ""; //  Refs should only be used for **reading** values
-    dateInputRef.current.value = ""; // exceptionally here it's okay since we are NOT manipulating the DOM
-    // setDateInput("");
-    // setTitleInput("");
+    listsDispatch({
+      type: "ADD_TODO",
+      todo: {
+        date: new Date(date),
+        title: title.trim(),
+        id: uuid(),
+        parentListId: props.parentList.id,
+      },
+    });
+    titleInputRef.current.value = "";
+    dateInputRef.current.value = "";
+    props.display();
   };
-
-  /*   const titleChangeHandler = (e) => {
-    setTitleInput(e.target.value);
-  };
-  const dateChangeHandler = (e) => {
-    setDateInput(e.target.value);
-  }; */
 
   const { onClickOutside } = props;
   const ref = useRef(null);
@@ -53,30 +44,14 @@ const NewTodoForm = (props) => {
     };
   }, [onClickOutside]);
 
-  if (!props.show) return null;
-
   return (
     <div ref={ref} id="new-todo-form-ctn">
       <p id="parent-list-title">Adding to: {props.parentList.title}</p>
       <form id="new-todo-form" onSubmit={submitHandler}>
         <label htmlFor="title">Title</label>
-        <input
-          id="title"
-          type="text"
-          // onChange={titleChangeHandler}
-          // value={titleInput}
-          required
-          ref={titleInputRef}
-        />
+        <input id="title" type="text" required ref={titleInputRef} />
         <label htmlFor="title">Date</label>
-        <input
-          id="date"
-          type="date"
-          // onChange={dateChangeHandler} //onChange={(e)=>setDateInput(e.target.value)}
-          // value={dateInput}
-          required
-          ref={dateInputRef}
-        />
+        <input id="date" type="date" required ref={dateInputRef} />
         <button>Submit</button>
       </form>
     </div>

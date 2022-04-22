@@ -1,3 +1,5 @@
+import React, { useContext } from "react";
+
 import "./MainDisplay.css";
 
 import ViewOverview from "./Views/ViewOverview";
@@ -5,29 +7,20 @@ import ViewListTodos from "./Views/ViewListTodos";
 import Modal from "./Layouts/Modal";
 import NewListForm from "./Views/NewListForm";
 
-const MainDisplay = (props) => {
-  const addNewTodoHandler = (newTodo) => {
-    props.onAddNewTodo(newTodo);
-  };
+import { DashboardContext } from "../store/dashboard-context";
+
+const MainDisplay = () => {
+  const ctx = useContext(DashboardContext);
 
   return (
     <div id="main-display">
-      {props.openModal && (
-        <Modal
-          openModal={props.openModal}
-          onClickOutside={() => props.setOpenModal(false)}
-        >
-          <NewListForm onAddNewList={props.onAddNewList} />
+      {ctx.openModal && (
+        <Modal onClickOutside={() => ctx.setOpenModal(!ctx.openModal)}>
+          <NewListForm />
         </Modal>
       )}
-      {props.display === "Overview" && <ViewOverview items={props.items} />}
-      {props.display === "Lists" && (
-        <ViewListTodos
-          items={props.items}
-          isItemActive={props.isItemActive}
-          onAddNewTodo={addNewTodoHandler}
-        />
-      )}
+      {ctx.display === "Overview" && ctx.lists.length > 0 && <ViewOverview />}
+      {ctx.display === "Lists" && <ViewListTodos />}
     </div>
   );
 };

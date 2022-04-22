@@ -1,6 +1,7 @@
-import React, { useRef, useEffect } from "react";
-
+import React, { useRef, useEffect, useContext } from "react";
+import { DashboardContext } from "../../store/dashboard-context";
 const Modal = (props) => {
+  const { openModal } = useContext(DashboardContext);
   //
   //
   //
@@ -10,7 +11,11 @@ const Modal = (props) => {
 
   useEffect(() => {
     const handleClickOutside = (event) => {
-      if (ref.current && !ref.current.contains(event.target)) {
+      if (
+        ref.current &&
+        !ref.current.contains(event.target) &&
+        event.target.textContent !== "Add New List"
+      ) {
         onClickOutside && onClickOutside();
       }
     };
@@ -20,7 +25,7 @@ const Modal = (props) => {
     };
   }, [onClickOutside]);
 
-  if (!props.openModal) return null;
+  // if (!openModal) return null;
 
   //
   //

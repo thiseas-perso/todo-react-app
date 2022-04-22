@@ -1,33 +1,38 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import { DashboardContext } from "../../store/dashboard-context";
+import { v4 as uuid } from "uuid";
 
-const NewListForm = (props) => {
-  const [inputValue, setInputValue] = useState("");
+const NewListForm = () => {
+  const { listsDispatch, setOpenModal, setIsActiveListHandler } =
+    useContext(DashboardContext);
+  const [title, setTitle] = useState("");
 
   const submitHandler = (e) => {
     e.preventDefault();
-    if (inputValue.length) {
-      const newItem = {
-        title: inputValue,
-        id: Math.random(),
-        todos: [],
-      };
-      props.onAddNewList(newItem);
+    if (title.trim().length > 0) {
+      setOpenModal((prev) => !prev);
+      let id = uuid();
+      listsDispatch({
+        type: "ADD_LIST",
+        list: {
+          title,
+          id,
+          todos: [],
+        },
+      });
+      setIsActiveListHandler(id);
     }
-    setInputValue("");
-  };
-
-  const titleChangeHandler = (e) => {
-    setInputValue(e.target.value);
+    setTitle("");
   };
 
   return (
     <form onSubmit={submitHandler}>
       <input
-        value={inputValue}
+        value={title}
         id="add-new-list"
         maxLength={15}
         placeholder="Add New List"
-        onChange={titleChangeHandler}
+        onChange={(e) => setTitle(e.target.value)}
         required
         autoFocus
       />
