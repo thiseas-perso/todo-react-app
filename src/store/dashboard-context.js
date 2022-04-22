@@ -67,7 +67,7 @@ const DashboardContextProvider = (props) => {
   const addNewListHandler = () => {
     setOpenModal((prev) => !prev);
   };
-  console.log(lists);
+
   return (
     <DashboardContext.Provider
       value={{

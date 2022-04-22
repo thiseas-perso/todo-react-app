@@ -3,7 +3,6 @@ import MainDisplay from "./MainDisplay";
 
 import "./Dashboard.css";
 import DashboardContextProvider from "../store/dashboard-context";
-// import { useState } from "react";
 
 const Dashboard = () => {
   return (
