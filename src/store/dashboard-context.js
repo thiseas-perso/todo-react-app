@@ -1,4 +1,4 @@
-import React, { createContext, useReducer, useState } from "react";
+import React, { createContext, useEffect, useReducer, useState } from "react";
 import { listsReducer } from "./listReducer";
 
 export const DashboardContext = createContext();
@@ -50,9 +50,22 @@ const DUMMY_DATA = [
 
 const DashboardContextProvider = (props) => {
   const [openModal, setOpenModal] = useState(false);
+  // fetch data here
+  const [dataBase, setDataBase] = useState(null);
+  useEffect(async () => {
+    const response = await fetch(
+      "https://todo-react-app-31e73-default-rtdb.firebaseio.com/"
+    );
+    const data = await response.json();
+    console.log(data);
+    if (data.length > 0) {
+    }
+  }, []);
+
   const [lists, listsDispatch] = useReducer(listsReducer, [], () => [
     ...DUMMY_DATA,
   ]);
+
   const [isActiveList, setIsActiveList] = useState(lists[0].id || null);
   const [display, setDisplay] = useState("Lists");
 

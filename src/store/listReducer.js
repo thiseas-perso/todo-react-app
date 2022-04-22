@@ -10,7 +10,6 @@ export const listsReducer = (state, action) => {
         },
       ];
     case "ADD_TODO":
-      console.log({ state });
       let updatedLists;
       const listToBeUpdatedIndex = state.findIndex(
         (list) => list.id === action.todo.parentListId
