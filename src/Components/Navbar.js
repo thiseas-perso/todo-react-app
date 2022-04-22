@@ -1,67 +1,52 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 
 import "./Navbar.css";
-import NavbarItem from "./Elements/NavbarItem";
-import ListItems from "./Elements/ListItems";
+import NavbarMenuHeader from "./Elements/NavbarMenuHeader";
+import Lists from "./Elements/Lists";
 import images from "../Assets";
 
-const Navbar = (props) => {
-  const [isActive, setIsActive] = useState("Lists");
+import { DashboardContext } from "../store/dashboard-context";
+
+const Navbar = () => {
+  const ctx = useContext(DashboardContext);
+
   const [folderIcon, setFolderIcon] = useState(images["folder-open.svg"]);
 
-  const handleChange = (selectItemTitle) => {
-    setIsActive(selectItemTitle);
-    props.setDisplay(selectItemTitle);
-    selectItemTitle === "Lists"
+  const clickHandler = (headerTitle) => {
+    ctx.setDisplayHandler(headerTitle);
+    headerTitle === "Lists"
       ? setFolderIcon(images["folder-open.svg"])
       : setFolderIcon(images["folder.svg"]);
-  };
-
-  const handleItemChange = (itemId) => {
-    props.setItemDisplayHandler(itemId);
   };
 
   return (
     <nav id="navbar">
       <h2 id="app-name">ToDos</h2>
-      <NavbarItem
+      <NavbarMenuHeader
         title={"Overview"}
         img={images["home.svg"]}
-        handleChange={handleChange}
-        isActive={isActive}
+        onClick={clickHandler}
       />
-      <NavbarItem
+      <NavbarMenuHeader
         title={"Lists"}
         img={folderIcon}
-        handleChange={handleChange}
-        isActive={isActive}
+        onClick={clickHandler}
       />
-      {isActive === "Lists" && props.lists.length > 0 && (
-        <ListItems
-          items={props.lists}
-          handleItemChange={handleItemChange}
-          isItemActive={props.isItemActive}
-          setOpenModal={props.setOpenModal}
-          openModal={props.openModal}
-        />
-      )}
-      <NavbarItem
+      {ctx.display === "Lists" && ctx.lists.length > 0 && <Lists />}
+      <NavbarMenuHeader
         title={"Today"}
         img={images["today.svg"]}
-        handleChange={handleChange}
-        isActive={isActive}
+        onClick={clickHandler}
       />
-      <NavbarItem
+      <NavbarMenuHeader
         title={"This week"}
         img={images["week.svg"]}
-        handleChange={handleChange}
-        isActive={isActive}
+        onClick={clickHandler}
       />
-      <NavbarItem
+      <NavbarMenuHeader
         title={"Notes"}
         img={images["notes.svg"]}
-        handleChange={handleChange}
-        isActive={isActive}
+        onClick={clickHandler}
       />
     </nav>
   );

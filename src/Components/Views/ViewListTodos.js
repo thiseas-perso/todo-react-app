@@ -1,11 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import "./ViewListTodos.css";
 import ListCardCtn from "./ListCardCtn";
 import NewTodoForm from "./NewTodoForm";
 
+import { DashboardContext } from "../../store/dashboard-context";
+
 const ViewListTodos = (props) => {
+  const ctx = useContext(DashboardContext);
   // find selected list in props.items // looking for id
-  const foundList = props.items.find((item) => item.id === props.isItemActive);
+  const activeList = ctx.lists.find((list) => list.id === ctx.isActiveList);
 
   const options = {
     weekday: "short",
@@ -16,21 +19,16 @@ const ViewListTodos = (props) => {
 
   const [clicked, setClicked] = useState(false);
   const clickHandler = () => {
-    setClicked(!clicked);
-  };
-
-  const submitHandler = (newTodo) => {
-    setClicked(!clicked);
-    props.onAddNewTodo(newTodo);
+    setClicked((prev) => !prev);
   };
 
   return (
     <ListCardCtn clicked={clicked}>
       {!clicked && (
-        <React.Fragment>
-          <h1>{foundList.title}</h1>
+        <>
+          <h1>{activeList.title}</h1>
           <div className="list-card">
-            {foundList.todos.map((todo) => (
+            {activeList.todos.map((todo) => (
               <div key={todo.id} className="list-card-line">
                 <p>{todo.title}</p>
                 <p className="date">
@@ -49,7 +47,7 @@ const ViewListTodos = (props) => {
           >
             add_circle
           </span>
-        </React.Fragment>
+        </>
       )}
       {clicked && (
         <NewTodoForm
@@ -57,8 +55,7 @@ const ViewListTodos = (props) => {
           onClickOutside={() => {
             setClicked(false);
           }}
-          parentList={foundList}
-          onSubmit={submitHandler}
+          parentList={activeList}
         />
       )}
     </ListCardCtn>

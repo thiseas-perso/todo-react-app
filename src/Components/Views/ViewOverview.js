@@ -1,12 +1,14 @@
-import React from "react";
+import React, { useContext } from "react";
 import OverviewCard from "./OverviewCard";
 
+import { DashboardContext } from "../../store/dashboard-context";
 import "./ViewOverview.css";
-const ViewOverview = (props) => {
+const ViewOverview = () => {
+  const ctx = useContext(DashboardContext);
   return (
     <div id="main-display-overview">
-      {props.items.map((item) => (
-        <OverviewCard key={item.id} title={item.title} todos={item.todos} />
+      {ctx.lists.map((list) => (
+        <OverviewCard key={list.id} title={list.title} todos={list.todos} />
       ))}
     </div>
   );
