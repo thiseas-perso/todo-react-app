@@ -7,7 +7,7 @@ import { DashboardContext } from "../../store/dashboard-context";
 
 const ViewListTodos = (props) => {
   const ctx = useContext(DashboardContext);
-  // find selected list in props.items // looking for id
+
   const activeList = ctx.lists.find((list) => list.id === ctx.isActiveList);
 
   const options = {

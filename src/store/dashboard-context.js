@@ -73,12 +73,12 @@ const DashboardContextProvider = (props) => {
     );
     if (tempList.length > 0) {
       setLists(tempList);
-      setIsActiveList(tempList[0].id);
+      // setIsActiveList(tempList[0].id);
     }
   };
   useEffect(() => {
     fetchLists();
-  }, []);
+  }, [lists]);
 
   const setDisplayHandler = (listTitle) => {
     setDisplay(listTitle);
