@@ -1,6 +1,6 @@
-import React, { createContext, useEffect, useReducer, useState } from "react";
-import { listsReducer } from "./listReducer";
-
+import React, { createContext, useEffect, useState } from "react";
+import { db } from "../firebase/firebase-config";
+import { collection, getDocs } from "firebase/firestore";
 export const DashboardContext = createContext();
 
 const DUMMY_DATA = [
@@ -49,13 +49,29 @@ const DUMMY_DATA = [
 ];
 
 const DashboardContextProvider = (props) => {
-  const [lists, listsDispatch] = useReducer(listsReducer, [], () => [
-    ...DUMMY_DATA,
-  ]);
+  const [lists, setLists] = useState([]);
 
   const [openModal, setOpenModal] = useState(false);
-  const [isActiveList, setIsActiveList] = useState(lists[0].id || null);
+  const [isActiveList, setIsActiveList] = useState("");
   const [display, setDisplay] = useState("Lists");
+
+  const listsCollectionRef = collection(db, "lists");
+
+  const fetchLists = async () => {
+    const dbSnapshot = await getDocs(listsCollectionRef);
+    const tempList = [];
+    dbSnapshot.forEach((entry) =>
+      tempList.push({ ...entry.data(), id: entry.id })
+    );
+    if (tempList.length > 0) {
+      setLists(tempList);
+
+      setIsActiveList(tempList[0].id);
+    }
+  };
+  useEffect(() => {
+    fetchLists();
+  }, []);
 
   const setDisplayHandler = (listTitle) => {
     setDisplay(listTitle);
@@ -65,22 +81,31 @@ const DashboardContextProvider = (props) => {
     setIsActiveList(listId);
   };
 
-  const addNewListHandler = () => {
+  const showNewListHandler = () => {
     setOpenModal((prev) => !prev);
+  };
+
+  const addTodoHandler = (newTodo) => {
+    console.log(newTodo);
+  };
+
+  const addListHandler = async (newList) => {
+    console.log(newList);
   };
 
   return (
     <DashboardContext.Provider
       value={{
         lists,
-        listsDispatch,
         setDisplayHandler,
         setIsActiveListHandler,
         isActiveList,
         display,
         openModal,
         setOpenModal,
-        addNewListHandler,
+        showNewListHandler,
+        addTodoHandler,
+        addListHandler,
       }}
     >
       {props.children}

@@ -4,7 +4,7 @@ import { DashboardContext } from "../../store/dashboard-context";
 import "./NewTodoForm.css";
 
 const NewTodoForm = (props) => {
-  const { listsDispatch } = useContext(DashboardContext);
+  const { addTodoHandler } = useContext(DashboardContext);
 
   const titleInputRef = useRef();
   const dateInputRef = useRef();
@@ -16,14 +16,11 @@ const NewTodoForm = (props) => {
     if (title.trim().length < 1) {
       return;
     }
-    listsDispatch({
-      type: "ADD_TODO",
-      todo: {
-        date: new Date(date),
-        title: title.trim(),
-        id: uuid(),
-        parentListId: props.parentList.id,
-      },
+    addTodoHandler({
+      date: new Date(date),
+      title: title.trim(),
+      id: uuid(),
+      parentListId: props.parentList.id,
     });
     titleInputRef.current.value = "";
     dateInputRef.current.value = "";

@@ -24,7 +24,7 @@ const ViewListTodos = (props) => {
 
   return (
     <ListCardCtn clicked={clicked}>
-      {!clicked && (
+      {!clicked && activeList && (
         <>
           <h1>{activeList.title}</h1>
           <div className="list-card">
@@ -49,7 +49,7 @@ const ViewListTodos = (props) => {
           </span>
         </>
       )}
-      {clicked && (
+      {clicked && activeList && (
         <NewTodoForm
           display={clickHandler}
           onClickOutside={() => {
