@@ -1,6 +1,15 @@
 import React, { createContext, useEffect, useState } from "react";
 import { db } from "../firebase/firebase-config";
-import { collection, getDocs } from "firebase/firestore";
+import {
+  collection,
+  getDocs,
+  addDoc,
+  doc,
+  getDoc,
+  setDoc,
+  updateDoc,
+  arrayUnion,
+} from "firebase/firestore";
 export const DashboardContext = createContext();
 
 const DUMMY_DATA = [
@@ -55,9 +64,8 @@ const DashboardContextProvider = (props) => {
   const [isActiveList, setIsActiveList] = useState("");
   const [display, setDisplay] = useState("Lists");
 
-  const listsCollectionRef = collection(db, "lists");
-
   const fetchLists = async () => {
+    const listsCollectionRef = collection(db, "lists");
     const dbSnapshot = await getDocs(listsCollectionRef);
     const tempList = [];
     dbSnapshot.forEach((entry) =>
@@ -65,7 +73,6 @@ const DashboardContextProvider = (props) => {
     );
     if (tempList.length > 0) {
       setLists(tempList);
-
       setIsActiveList(tempList[0].id);
     }
   };
@@ -85,12 +92,27 @@ const DashboardContextProvider = (props) => {
     setOpenModal((prev) => !prev);
   };
 
-  const addTodoHandler = (newTodo) => {
+  const addTodoHandler = async (newTodo) => {
     console.log(newTodo);
+    const parentListRef = doc(db, "lists", newTodo.parentListId);
+    await updateDoc(parentListRef, {
+      todos: arrayUnion({ ...newTodo }),
+    });
+    // setLists((prevState) => {
+    //   const tempArr = [...prevState];
+    //   const listToBeUpdated = tempArr.find(
+    //     (list) => list.id === newTodo.parentListId
+    //   );
+    //   listToBeUpdated.todos.push(newTodo);
+    //   return [...tempArr];
+    // });
   };
 
   const addListHandler = async (newList) => {
     console.log(newList);
+    await setDoc(doc(db, "lists", newList.id), { ...newList });
+    // setLists((prev) => [...prev, newList]);
+    fetchLists();
   };
 
   return (

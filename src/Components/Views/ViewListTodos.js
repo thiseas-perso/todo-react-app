@@ -32,9 +32,7 @@ const ViewListTodos = (props) => {
               <div key={todo.id} className="list-card-line">
                 <p>{todo.title}</p>
                 <p className="date">
-                  {todo.date
-                    .toLocaleString("en-US", options)
-                    .replace(/,/g, " ")}
+                  {todo.date.toDate().toLocaleString("en-US", options)}
                 </p>
               </div>
             ))}

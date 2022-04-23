@@ -41,6 +41,9 @@ const NewTodoForm = (props) => {
     };
   }, [onClickOutside]);
 
+  const newdate = new Date();
+  const defaultValue = newdate.toLocaleDateString("en-CA");
+
   return (
     <div ref={ref} id="new-todo-form-ctn">
       <p id="parent-list-title">Adding to: {props.parentList.title}</p>
@@ -48,7 +51,13 @@ const NewTodoForm = (props) => {
         <label htmlFor="title">Title</label>
         <input id="title" type="text" required ref={titleInputRef} />
         <label htmlFor="title">Date</label>
-        <input id="date" type="date" required ref={dateInputRef} />
+        <input
+          id="date"
+          type="date"
+          required
+          ref={dateInputRef}
+          defaultValue={defaultValue}
+        />
         <button>Submit</button>
       </form>
     </div>
