@@ -24,7 +24,7 @@ const ViewListTodos = (props) => {
 
   return (
     <ListCardCtn clicked={clicked}>
-      {!clicked && (
+      {!clicked && activeList && (
         <>
           <h1>{activeList.title}</h1>
           <div className="list-card">
@@ -32,9 +32,7 @@ const ViewListTodos = (props) => {
               <div key={todo.id} className="list-card-line">
                 <p>{todo.title}</p>
                 <p className="date">
-                  {todo.date
-                    .toLocaleString("en-US", options)
-                    .replace(/,/g, " ")}
+                  {todo.date.toDate().toLocaleString("en-US", options)}
                 </p>
               </div>
             ))}
@@ -49,7 +47,7 @@ const ViewListTodos = (props) => {
           </span>
         </>
       )}
-      {clicked && (
+      {clicked && activeList && (
         <NewTodoForm
           display={clickHandler}
           onClickOutside={() => {

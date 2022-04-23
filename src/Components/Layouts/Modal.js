@@ -1,11 +1,8 @@
 import React, { useRef, useEffect, useContext } from "react";
-import { DashboardContext } from "../../store/dashboard-context";
+
 const Modal = (props) => {
-  const { openModal } = useContext(DashboardContext);
   //
-  //
-  //
-  //
+
   const ref = useRef(null);
   const { onClickOutside } = props;
 
@@ -24,12 +21,6 @@ const Modal = (props) => {
       document.removeEventListener("click", handleClickOutside, true);
     };
   }, [onClickOutside]);
-
-  // if (!openModal) return null;
-
-  //
-  //
-  //
 
   return (
     <div ref={ref} id="modal">

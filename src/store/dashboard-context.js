@@ -1,6 +1,15 @@
-import React, { createContext, useReducer, useState } from "react";
-import { listsReducer } from "./listReducer";
-
+import React, { createContext, useEffect, useState } from "react";
+import { db } from "../firebase/firebase-config";
+import {
+  collection,
+  getDocs,
+  addDoc,
+  doc,
+  getDoc,
+  setDoc,
+  updateDoc,
+  arrayUnion,
+} from "firebase/firestore";
 export const DashboardContext = createContext();
 
 const DUMMY_DATA = [
@@ -49,12 +58,27 @@ const DUMMY_DATA = [
 ];
 
 const DashboardContextProvider = (props) => {
+  const [lists, setLists] = useState([]);
+
   const [openModal, setOpenModal] = useState(false);
-  const [lists, listsDispatch] = useReducer(listsReducer, [], () => [
-    ...DUMMY_DATA,
-  ]);
-  const [isActiveList, setIsActiveList] = useState(lists[0].id || null);
+  const [isActiveList, setIsActiveList] = useState("");
   const [display, setDisplay] = useState("Lists");
+
+  const fetchLists = async () => {
+    const listsCollectionRef = collection(db, "lists");
+    const dbSnapshot = await getDocs(listsCollectionRef);
+    const tempList = [];
+    dbSnapshot.forEach((entry) =>
+      tempList.push({ ...entry.data(), id: entry.id })
+    );
+    if (tempList.length > 0) {
+      setLists(tempList);
+      setIsActiveList(tempList[0].id);
+    }
+  };
+  useEffect(() => {
+    fetchLists();
+  }, []);
 
   const setDisplayHandler = (listTitle) => {
     setDisplay(listTitle);
@@ -64,22 +88,46 @@ const DashboardContextProvider = (props) => {
     setIsActiveList(listId);
   };
 
-  const addNewListHandler = () => {
+  const showNewListHandler = () => {
     setOpenModal((prev) => !prev);
+  };
+
+  const addTodoHandler = async (newTodo) => {
+    console.log(newTodo);
+    const parentListRef = doc(db, "lists", newTodo.parentListId);
+    await updateDoc(parentListRef, {
+      todos: arrayUnion({ ...newTodo }),
+    });
+    // setLists((prevState) => {
+    //   const tempArr = [...prevState];
+    //   const listToBeUpdated = tempArr.find(
+    //     (list) => list.id === newTodo.parentListId
+    //   );
+    //   listToBeUpdated.todos.push(newTodo);
+    //   return [...tempArr];
+    // });
+  };
+
+  const addListHandler = async (newList) => {
+    console.log(newList);
+    await setDoc(doc(db, "lists", newList.id), { ...newList });
+    // setLists((prev) => [...prev, newList]);
+    fetchLists();
   };
 
   return (
     <DashboardContext.Provider
       value={{
         lists,
-        listsDispatch,
         setDisplayHandler,
         setIsActiveListHandler,
         isActiveList,
         display,
         openModal,
         setOpenModal,
-        addNewListHandler,
+        showNewListHandler,
+        addTodoHandler,
+        addListHandler,
       }}
     >
       {props.children}

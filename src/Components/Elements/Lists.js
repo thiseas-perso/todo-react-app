@@ -14,7 +14,7 @@ const Lists = () => {
           <List key={list.id} id={list.id} title={list.title} />
         ))}
       </ul>
-      <button onClick={ctx.addNewListHandler}>Add New List</button>
+      <button onClick={ctx.showNewListHandler}>Add New List</button>
     </div>
   );
 };
