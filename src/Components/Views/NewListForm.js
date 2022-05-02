@@ -1,10 +1,12 @@
-import React, { useContext, useState } from "react";
-import { DashboardContext } from "../../store/dashboard-context";
+import React, { useState } from "react";
+
 import { v4 as uuid } from "uuid";
 
-const NewListForm = () => {
-  const { addListHandler, setOpenModal, setIsActiveListHandler } =
-    useContext(DashboardContext);
+const NewListForm = ({
+  addListHandler,
+  setOpenModal,
+  setIsActiveListHandler,
+}) => {
   const [title, setTitle] = useState("");
 
   const submitHandler = (e) => {

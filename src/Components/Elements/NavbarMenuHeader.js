@@ -1,22 +1,18 @@
-import React, { useContext } from "react";
+import React from "react";
 import "./NavbarItem.css";
-import { DashboardContext } from "../../store/dashboard-context";
 
-const NavbarMenuHeader = (props) => {
-  const ctx = useContext(DashboardContext);
+const NavbarMenuHeader = ({ display, title, img, onClick }) => {
   const clickHandler = () => {
-    props.onClick(props.title);
+    onClick(title);
   };
 
   return (
     <div
-      className={`nav-item ${
-        ctx.display === props.title ? "active" : "not-active"
-      }`}
+      className={`nav-item ${display === title ? "active" : "not-active"}`}
       onClick={clickHandler}
     >
-      <img src={props.img} alt="" />
-      <h2 className="nav-title">{props.title}</h2>
+      <img src={img} alt="" />
+      <h2 className="nav-title">{title}</h2>
     </div>
   );
 };

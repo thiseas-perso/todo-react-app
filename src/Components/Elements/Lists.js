@@ -1,20 +1,30 @@
-import React, { useContext } from "react";
-import "./ListItems.css";
+import React from "react";
+import { useSelector } from "react-redux";
 
-import { DashboardContext } from "../../store/dashboard-context";
+import "./ListItems.css";
 import List from "./List";
 
-const Lists = () => {
-  const ctx = useContext(DashboardContext);
+const Lists = ({
+  setIsActiveListHandler,
+  isActiveList,
+  showNewListHandler,
+}) => {
+  const lists = useSelector((state) => state.lists);
 
   return (
     <div className="list-ctn">
       <ul>
-        {ctx.lists.map((list) => (
-          <List key={list.id} id={list.id} title={list.title} />
+        {lists.map((list) => (
+          <List
+            key={list.id}
+            id={list.id}
+            title={list.title}
+            setIsActiveListHandler={setIsActiveListHandler}
+            isActiveList={isActiveList}
+          />
         ))}
       </ul>
-      <button onClick={ctx.showNewListHandler}>Add New List</button>
+      <button onClick={showNewListHandler}>Add New List</button>
     </div>
   );
 };

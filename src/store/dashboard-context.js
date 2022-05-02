@@ -59,7 +59,6 @@ const DUMMY_DATA = [
 
 const DashboardContextProvider = (props) => {
   const [lists, setLists] = useState([]);
-
   const [openModal, setOpenModal] = useState(false);
   const [isActiveList, setIsActiveList] = useState("");
   const [display, setDisplay] = useState("Lists");

@@ -1,11 +1,8 @@
-import React, { useContext } from "react";
-
-import { DashboardContext } from "../../store/dashboard-context";
+import React from "react";
 
 const List = (props) => {
-  const ctx = useContext(DashboardContext);
   const clickHandler = () => {
-    ctx.setIsActiveListHandler(props.id);
+    props.setIsActiveListHandler(props.id);
   };
 
   return (
@@ -13,7 +10,7 @@ const List = (props) => {
       id={props.id}
       onClick={clickHandler}
       className={`nav-sub-item ${
-        ctx.isActiveList === props.id ? "active" : "not-active"
+        props.isActiveList === props.id ? "active" : "not-active"
       }`}
     >
       {props.title}

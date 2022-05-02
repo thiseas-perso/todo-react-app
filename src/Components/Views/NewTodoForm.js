@@ -1,11 +1,10 @@
-import { useEffect, useRef, useContext } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { useEffect, useRef } from "react";
 import { v4 as uuid } from "uuid";
-import { DashboardContext } from "../../store/dashboard-context";
+
 import "./NewTodoForm.css";
 
 const NewTodoForm = (props) => {
-  const { addTodoHandler } = useContext(DashboardContext);
-
   const titleInputRef = useRef();
   const dateInputRef = useRef();
 
@@ -16,16 +15,18 @@ const NewTodoForm = (props) => {
     if (title.trim().length < 1) {
       return;
     }
-    addTodoHandler({
-      date: new Date(date),
-      title: title.trim(),
-      id: uuid(),
-      parentListId: props.parentList.id,
-    });
-    titleInputRef.current.value = "";
-    dateInputRef.current.value = "";
-    props.display();
   };
+
+  //   ({
+  //     date: new Date(date),
+  //     title: title.trim(),
+  //     id: uuid(),
+  //     parentListId: props.parentList.id,
+  //   });
+  //   titleInputRef.current.value = "";
+  //   dateInputRef.current.value = "";
+  //   props.display();
+  // };
 
   const { onClickOutside } = props;
   const ref = useRef(null);
