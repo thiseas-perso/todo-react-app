@@ -31,8 +31,7 @@ const ViewListTodos = ({ isActiveList }) => {
               <div key={todo.id} className="list-card-line">
                 <p>{todo.title}</p>
                 <p className="date">
-                  {todo.date
-                    .toDate()
+                  {new Date(todo.date)
                     .toLocaleString("en-US", options)
                     .replace(",", " ")}
                 </p>

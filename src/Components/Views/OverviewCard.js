@@ -17,8 +17,7 @@ const OverviewCard = (props) => {
           <div key={todo.id} className={"card-details"}>
             <p>{todo.title}</p>
             <p className="date">
-              {todo.date
-                .toDate()
+              {new Date(todo.date)
                 .toLocaleString("en-US", options)
                 .replace(",", " ")}
             </p>

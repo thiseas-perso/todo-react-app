@@ -22,13 +22,13 @@ const NewTodoForm = (props) => {
         setAddTodoStatus("pending");
         const id = uuid();
         const parentListId = props.parentList.id;
-        const date = new Date(date);
+
         dispatch(
           addNewTodo({
             title,
             id,
             parentListId,
-            date,
+            date: new Date(date).toISOString(),
             completed: false,
             priority: 0,
           })
