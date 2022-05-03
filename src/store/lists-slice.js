@@ -47,14 +47,17 @@ const initialState = [
 
 const listsSlice = createSlice({
   name: "lists",
-  initialState,
-  reducer: {
+  initialState: [],
+  reducers: {
     addList(state, action) {
       state.push(action.payload);
     },
     addTodo(state, action) {
-      const parentList = state.find((list) => list.id === action.payload.id);
-      parentList.push(action.payload);
+      console.log(action.payload.parentList);
+      const parentList = state.find(
+        (list) => list.id === action.payload.parentListId
+      );
+      parentList.todos.push(action.payload);
     },
   },
 });

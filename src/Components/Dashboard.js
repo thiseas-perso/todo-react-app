@@ -37,6 +37,7 @@ const Dashboard = () => {
         isActiveList={isActiveList}
         display={display}
         openModal={openModal}
+        setIsActiveListHandler={setIsActiveListHandler}
       />
     </div>
   );

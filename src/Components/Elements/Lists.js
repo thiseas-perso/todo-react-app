@@ -13,17 +13,20 @@ const Lists = ({
 
   return (
     <div className="list-ctn">
-      <ul>
-        {lists.map((list) => (
-          <List
-            key={list.id}
-            id={list.id}
-            title={list.title}
-            setIsActiveListHandler={setIsActiveListHandler}
-            isActiveList={isActiveList}
-          />
-        ))}
-      </ul>
+      {
+        <ul>
+          {lists.length > 0 &&
+            lists.map((list) => (
+              <List
+                key={list.id}
+                id={list.id}
+                title={list.title}
+                setIsActiveListHandler={setIsActiveListHandler}
+                isActiveList={isActiveList}
+              />
+            ))}
+        </ul>
+      }
       <button onClick={showNewListHandler}>Add New List</button>
     </div>
   );

@@ -19,7 +19,10 @@ const MainDisplay = ({
     <div id="main-display">
       {openModal && (
         <Modal onClickOutside={() => setOpenModal(!openModal)}>
-          <NewListForm />
+          <NewListForm
+            setOpenModal={setOpenModal}
+            setIsActiveListHandler={setIsActiveListHandler}
+          />
         </Modal>
       )}
       {display === "Overview" && lists.length > 0 && <ViewOverview />}

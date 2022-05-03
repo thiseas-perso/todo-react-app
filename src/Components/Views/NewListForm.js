@@ -1,25 +1,21 @@
-import React, { useState } from "react";
-
+import { useState } from "react";
+import { useDispatch } from "react-redux";
 import { v4 as uuid } from "uuid";
 
-const NewListForm = ({
-  addListHandler,
-  setOpenModal,
-  setIsActiveListHandler,
-}) => {
+import { listsActions } from "../../store/lists-slice";
+
+const NewListForm = ({ setOpenModal, setIsActiveListHandler }) => {
+  const dispatch = useDispatch();
   const [title, setTitle] = useState("");
 
   const submitHandler = (e) => {
     e.preventDefault();
     if (title.trim().length > 0) {
+      const id = uuid();
+      dispatch(listsActions.addList({ title, id, todos: [] }));
+
       setOpenModal((prev) => !prev);
-      let id = uuid();
-      addListHandler({
-        title,
-        id,
-        todos: [],
-      });
-      // setIsActiveListHandler(id);
+      setIsActiveListHandler(id);
     }
     setTitle("");
   };

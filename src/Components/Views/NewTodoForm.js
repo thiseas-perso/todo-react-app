@@ -1,32 +1,30 @@
-import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useRef } from "react";
+import { useDispatch } from "react-redux";
 import { v4 as uuid } from "uuid";
+
+import { listsActions } from "../../store/lists-slice";
 
 import "./NewTodoForm.css";
 
 const NewTodoForm = (props) => {
+  const dispatch = useDispatch();
   const titleInputRef = useRef();
   const dateInputRef = useRef();
 
   const submitHandler = (e) => {
     e.preventDefault();
-    const title = titleInputRef.current.value;
+    const title = titleInputRef.current.value.trim();
     const date = dateInputRef.current.value;
-    if (title.trim().length < 1) {
+    const id = uuid();
+    const parentListId = props.parentList.id;
+    if (title.trim().length < 1 || date === "") {
       return;
     }
+    dispatch(listsActions.addTodo({ title, date, id, parentListId }));
+    titleInputRef.current.value = "";
+    dateInputRef.current.value = "";
+    props.display();
   };
-
-  //   ({
-  //     date: new Date(date),
-  //     title: title.trim(),
-  //     id: uuid(),
-  //     parentListId: props.parentList.id,
-  //   });
-  //   titleInputRef.current.value = "";
-  //   dateInputRef.current.value = "";
-  //   props.display();
-  // };
 
   const { onClickOutside } = props;
   const ref = useRef(null);

@@ -37,7 +37,7 @@ const Navbar = ({
         img={folderIcon}
         onClick={clickHandler}
       />
-      {display === "Lists" && lists.length > 0 && (
+      {display === "Lists" && (
         <Lists
           setIsActiveListHandler={setIsActiveListHandler}
           isActiveList={isActiveList}
