@@ -1,23 +1,21 @@
-import React, { useContext, useState } from "react";
-import { DashboardContext } from "../../store/dashboard-context";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
 import { v4 as uuid } from "uuid";
 
-const NewListForm = () => {
-  const { addListHandler, setOpenModal, setIsActiveListHandler } =
-    useContext(DashboardContext);
+import { addNewList } from "../../store/lists-slice";
+
+const NewListForm = ({ setOpenModal, setIsActiveListHandler }) => {
+  const dispatch = useDispatch();
   const [title, setTitle] = useState("");
 
   const submitHandler = (e) => {
     e.preventDefault();
     if (title.trim().length > 0) {
+      const id = uuid();
+      dispatch(addNewList({ title, id, todos: [] }));
+
       setOpenModal((prev) => !prev);
-      let id = uuid();
-      addListHandler({
-        title,
-        id,
-        todos: [],
-      });
-      // setIsActiveListHandler(id);
+      setIsActiveListHandler(id);
     }
     setTitle("");
   };

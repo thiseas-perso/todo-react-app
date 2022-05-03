@@ -1,21 +1,20 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
+import { useSelector } from "react-redux";
+
 import "./ViewListTodos.css";
 import ListCardCtn from "./ListCardCtn";
 import NewTodoForm from "./NewTodoForm";
 
-import { DashboardContext } from "../../store/dashboard-context";
+const ViewListTodos = ({ isActiveList }) => {
+  const lists = useSelector((state) => state.lists.lists);
+  const activeList = lists.find((list) => list.id === isActiveList);
 
-const ViewListTodos = (props) => {
-  const ctx = useContext(DashboardContext);
-
-  const activeList = ctx.lists.find((list) => list.id === ctx.isActiveList);
-
-  const options = {
-    weekday: "short",
-    month: "short",
-    day: "2-digit",
-    year: "numeric",
-  };
+  // const options = {
+  //   weekday: "short",
+  //   month: "short",
+  //   day: "2-digit",
+  //   year: "numeric",
+  // };
 
   const [clicked, setClicked] = useState(false);
   const clickHandler = () => {
@@ -31,9 +30,7 @@ const ViewListTodos = (props) => {
             {activeList.todos.map((todo) => (
               <div key={todo.id} className="list-card-line">
                 <p>{todo.title}</p>
-                <p className="date">
-                  {todo.date.toDate().toLocaleString("en-US", options)}
-                </p>
+                <p className="date">{todo.date}</p>
               </div>
             ))}
           </div>

@@ -2,11 +2,11 @@ import React from "react";
 import "./OverviewCard.css";
 
 const OverviewCard = (props) => {
-  let options = {
-    // weekday: "short",
-    month: "short",
-    day: "2-digit",
-  };
+  // const options = {
+  //   // weekday: "short",
+  //   month: "short",
+  //   day: "2-digit",
+  // };
 
   return (
     <div className="overview-card">
@@ -16,9 +16,7 @@ const OverviewCard = (props) => {
         props.todos.slice(0, 3).map((todo) => (
           <div key={todo.id} className={"card-details"}>
             <p>{todo.title}</p>
-            <p className="date">
-              {todo.date.toDate().toLocaleString("en-US", options)}
-            </p>
+            <p className="date">{todo.date}</p>
           </div>
         ))}
     </div>

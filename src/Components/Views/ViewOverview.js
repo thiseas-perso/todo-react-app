@@ -1,13 +1,13 @@
-import React, { useContext } from "react";
+import { useSelector } from "react-redux";
 import OverviewCard from "./OverviewCard";
 
-import { DashboardContext } from "../../store/dashboard-context";
 import "./ViewOverview.css";
+
 const ViewOverview = () => {
-  const ctx = useContext(DashboardContext);
+  const lists = useSelector((state) => state.lists.lists);
   return (
     <div id="main-display-overview">
-      {ctx.lists.map((list) => (
+      {lists.map((list) => (
         <OverviewCard key={list.id} title={list.title} todos={list.todos} />
       ))}
     </div>

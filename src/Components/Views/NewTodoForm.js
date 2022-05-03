@@ -1,30 +1,53 @@
-import { useEffect, useRef, useContext } from "react";
+import { useEffect, useState, useRef } from "react";
+import { useDispatch } from "react-redux";
 import { v4 as uuid } from "uuid";
-import { DashboardContext } from "../../store/dashboard-context";
+
+import { addNewTodo } from "../../store/lists-slice";
+
 import "./NewTodoForm.css";
 
 const NewTodoForm = (props) => {
-  const { addTodoHandler } = useContext(DashboardContext);
+  const dispatch = useDispatch();
+  const [title, setTitle] = useState("");
+  const [date, setDate] = useState("");
+  const [addTodoStatus, setAddTodoStatus] = useState("idle");
 
-  const titleInputRef = useRef();
-  const dateInputRef = useRef();
-
+  const canSubmit =
+    [title.trim(), date].every(Boolean) && addTodoStatus === "idle";
   const submitHandler = (e) => {
     e.preventDefault();
-    const title = titleInputRef.current.value;
-    const date = dateInputRef.current.value;
-    if (title.trim().length < 1) {
-      return;
+    const options = {
+      weekday: "short",
+      month: "short",
+      day: "2-digit",
+      year: "numeric",
+    };
+    if (canSubmit) {
+      try {
+        setAddTodoStatus("pending");
+        const id = uuid();
+        const parentListId = props.parentList.id;
+        dispatch(
+          addNewTodo({
+            title,
+            id,
+            parentListId,
+            date: new Date(date)
+              .toLocaleString("en-US", options)
+              .replace(",", " "),
+            completed: false,
+            priority: 0,
+          })
+        );
+        setDate("");
+        setTitle("");
+        props.display();
+      } catch (err) {
+        console.log(err);
+      } finally {
+        setAddTodoStatus("idle");
+      }
     }
-    addTodoHandler({
-      date: new Date(date),
-      title: title.trim(),
-      id: uuid(),
-      parentListId: props.parentList.id,
-    });
-    titleInputRef.current.value = "";
-    dateInputRef.current.value = "";
-    props.display();
   };
 
   const { onClickOutside } = props;
@@ -41,24 +64,28 @@ const NewTodoForm = (props) => {
     };
   }, [onClickOutside]);
 
-  const newdate = new Date();
-  const defaultValue = newdate.toLocaleDateString("en-CA");
+  // const newdate = new Date();
+  // const defaultValue = newdate.toLocaleDateString("en-CA");
 
   return (
     <div ref={ref} id="new-todo-form-ctn">
       <p id="parent-list-title">Adding to: {props.parentList.title}</p>
       <form id="new-todo-form" onSubmit={submitHandler}>
         <label htmlFor="title">Title</label>
-        <input id="title" type="text" required ref={titleInputRef} />
+        <input
+          id="title"
+          type="text"
+          required
+          onChange={(e) => setTitle(e.target.value)}
+        />
         <label htmlFor="title">Date</label>
         <input
           id="date"
           type="date"
           required
-          ref={dateInputRef}
-          defaultValue={defaultValue}
+          onChange={(e) => setDate(e.target.value)}
         />
-        <button>Submit</button>
+        <button disabled={!canSubmit}>Submit</button>
       </form>
     </div>
   );
