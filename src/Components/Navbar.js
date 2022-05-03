@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { useSelector } from "react-redux";
 import "./Navbar.css";
 import NavbarMenuHeader from "./Elements/NavbarMenuHeader";
 import Lists from "./Elements/Lists";
@@ -12,7 +11,6 @@ const Navbar = ({
   isActiveList,
   showNewListHandler,
 }) => {
-  const lists = useSelector((state) => state.lists);
   const [folderIcon, setFolderIcon] = useState(images["folder-open.svg"]);
 
   const clickHandler = (headerTitle) => {

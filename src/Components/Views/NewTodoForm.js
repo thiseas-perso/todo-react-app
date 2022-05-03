@@ -2,7 +2,7 @@ import { useEffect, useRef } from "react";
 import { useDispatch } from "react-redux";
 import { v4 as uuid } from "uuid";
 
-import { listsActions } from "../../store/lists-slice";
+import { addNewTodo } from "../../store/lists-slice";
 
 import "./NewTodoForm.css";
 
@@ -20,7 +20,7 @@ const NewTodoForm = (props) => {
     if (title.trim().length < 1 || date === "") {
       return;
     }
-    dispatch(listsActions.addTodo({ title, date, id, parentListId }));
+    dispatch(addNewTodo({ title, date, id, parentListId }));
     titleInputRef.current.value = "";
     dateInputRef.current.value = "";
     props.display();

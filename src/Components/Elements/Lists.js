@@ -9,14 +9,14 @@ const Lists = ({
   isActiveList,
   showNewListHandler,
 }) => {
-  const lists = useSelector((state) => state.lists);
+  const lists = useSelector((state) => state.lists.lists);
 
   return (
     <div className="list-ctn">
-      {
-        <ul>
-          {lists.length > 0 &&
-            lists.map((list) => (
+      <ul>
+        {lists.length > 0 &&
+          lists.map((list) => {
+            return (
               <List
                 key={list.id}
                 id={list.id}
@@ -24,9 +24,10 @@ const Lists = ({
                 setIsActiveListHandler={setIsActiveListHandler}
                 isActiveList={isActiveList}
               />
-            ))}
-        </ul>
-      }
+            );
+          })}
+      </ul>
+
       <button onClick={showNewListHandler}>Add New List</button>
     </div>
   );

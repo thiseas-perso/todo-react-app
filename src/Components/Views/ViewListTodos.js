@@ -6,7 +6,7 @@ import ListCardCtn from "./ListCardCtn";
 import NewTodoForm from "./NewTodoForm";
 
 const ViewListTodos = ({ isActiveList }) => {
-  const lists = useSelector((state) => state.lists);
+  const lists = useSelector((state) => state.lists.lists);
   const activeList = lists.find((list) => list.id === isActiveList);
 
   const options = {

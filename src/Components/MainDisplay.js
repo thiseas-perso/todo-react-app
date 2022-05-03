@@ -14,7 +14,7 @@ const MainDisplay = ({
   isActiveList,
   setIsActiveListHandler,
 }) => {
-  const lists = useSelector((state) => state.lists);
+  const lists = useSelector((state) => state.lists.lists);
   return (
     <div id="main-display">
       {openModal && (

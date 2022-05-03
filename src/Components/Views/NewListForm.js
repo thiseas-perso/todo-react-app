@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { v4 as uuid } from "uuid";
 
-import { listsActions } from "../../store/lists-slice";
+import { addNewList } from "../../store/lists-slice";
 
 const NewListForm = ({ setOpenModal, setIsActiveListHandler }) => {
   const dispatch = useDispatch();
@@ -12,7 +12,7 @@ const NewListForm = ({ setOpenModal, setIsActiveListHandler }) => {
     e.preventDefault();
     if (title.trim().length > 0) {
       const id = uuid();
-      dispatch(listsActions.addList({ title, id, todos: [] }));
+      dispatch(addNewList({ title, id, todos: [] }));
 
       setOpenModal((prev) => !prev);
       setIsActiveListHandler(id);

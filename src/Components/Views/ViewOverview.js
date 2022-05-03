@@ -1,11 +1,10 @@
-import React from "react";
 import { useSelector } from "react-redux";
 import OverviewCard from "./OverviewCard";
 
 import "./ViewOverview.css";
 
 const ViewOverview = () => {
-  const lists = useSelector((state) => state.lists);
+  const lists = useSelector((state) => state.lists.lists);
   return (
     <div id="main-display-overview">
       {lists.map((list) => (
