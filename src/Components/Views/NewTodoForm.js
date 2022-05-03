@@ -16,25 +16,19 @@ const NewTodoForm = (props) => {
     [title.trim(), date].every(Boolean) && addTodoStatus === "idle";
   const submitHandler = (e) => {
     e.preventDefault();
-    const options = {
-      weekday: "short",
-      month: "short",
-      day: "2-digit",
-      year: "numeric",
-    };
+
     if (canSubmit) {
       try {
         setAddTodoStatus("pending");
         const id = uuid();
         const parentListId = props.parentList.id;
+
         dispatch(
           addNewTodo({
             title,
             id,
             parentListId,
-            date: new Date(date)
-              .toLocaleString("en-US", options)
-              .replace(",", " "),
+            date: new Date(date).toISOString(),
             completed: false,
             priority: 0,
           })
