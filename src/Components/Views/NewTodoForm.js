@@ -14,6 +14,7 @@ const NewTodoForm = (props) => {
 
   const canSubmit =
     [title.trim(), date].every(Boolean) && addTodoStatus === "idle";
+
   const submitHandler = (e) => {
     e.preventDefault();
 
@@ -58,9 +59,6 @@ const NewTodoForm = (props) => {
     };
   }, [onClickOutside]);
 
-  // const newdate = new Date();
-  // const defaultValue = newdate.toLocaleDateString("en-CA");
-
   return (
     <div ref={ref} id="new-todo-form-ctn">
       <p id="parent-list-title">Adding to: {props.parentList.title}</p>
@@ -71,6 +69,7 @@ const NewTodoForm = (props) => {
           type="text"
           required
           onChange={(e) => setTitle(e.target.value)}
+          value={title}
         />
         <label htmlFor="title">Date</label>
         <input
@@ -78,6 +77,7 @@ const NewTodoForm = (props) => {
           type="date"
           required
           onChange={(e) => setDate(e.target.value)}
+          value={date}
         />
         <button disabled={!canSubmit}>Submit</button>
       </form>
