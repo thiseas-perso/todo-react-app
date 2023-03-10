@@ -1,25 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
+import { useSelector, useDispatch } from "react-redux";
+import React, { useEffect } from "react";
+
+import { fetchLists } from "./store/lists-slice";
+
+import "./App.css";
+import Dashboard from "./Components/Dashboard";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  const dispatch = useDispatch();
+  const status = useSelector((state) => state.lists.status);
+  const error = useSelector((state) => state.lists.error);
+
+  useEffect(() => {
+    if (status === "idle") {
+      dispatch(fetchLists());
+    }
+  }, [status, dispatch]);
+
+  let content;
+  if (status === "loading") {
+    content = <p>"LOADING....</p>;
+  } else if (status === "succeeded") {
+    content = <Dashboard />;
+  } else if (status === "failed") {
+    content = <p>{error}</p>;
+  }
+  return <div className="App">{content}</div>;
 }
 
 export default App;

@@ -1,0 +1,70 @@
+ul{
+   list-style: none;
+   padding: 0;
+   margin: 0;
+}
+
+li{
+   margin-bottom: 1rem;
+   padding: 0.2rem 0.4rem;
+   transition: all 100ms ease-in;
+}
+
+li:hover{
+   cursor: pointer;
+   border-radius: 0.5rem;
+   background-color: #FFDDD2;
+}
+
+li:active{
+   background-color: hsl(172, 79%, 80%);
+}
+
+ul .active{
+   background-color: #FFDDD2;
+   border: none
+}
+
+.list-ctn{
+   display: flex;
+   flex-direction: column;
+   align-items: flex-end;
+}
+
+.list-ctn form{
+   display: flex;
+   flex-direction: column;
+   gap: 0.5rem;
+   align-items: flex-end;
+}
+
+
+.list-ctn form input{
+   width: 10ch;
+   border: 1px solid black;
+   border-radius: 0.5rem;
+   line-height: 1.5rem;
+}
+.list-ctn form label {
+   font-size: 0.8rem;
+}
+
+.list-ctn button{
+   background: #006D77;
+   box-shadow: none;
+   border:none;
+   border-radius: 0.5rem;
+   text-shadow: none;
+   color: white;
+   font-weight: 600;
+   padding: 0.4rem 0.8rem;
+   width: fit-content
+}
+
+.list-ctn button:hover{
+   background: #83C5BE;
+   cursor: pointer;
+}
+.list-ctn button:active{
+   background: #83C5BE
+}

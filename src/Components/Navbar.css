@@ -1,0 +1,20 @@
+.nav-title{
+   font-size: 1rem;
+   font-weight: 400;
+   margin: 0;
+}
+
+#navbar{
+   background-color: #fff;
+   padding: 1.5rem;
+   border-right: 1px solid hsl(0, 0%, 82%);
+   display: grid;
+   grid-template-columns: max-content;
+   grid-gap: 1.5rem;
+}
+
+#app-name{
+   font-size: 1.5rem;
+   font-weight: 900;
+   grid-area: 1 / 1 / 1 / 2 ;
+}

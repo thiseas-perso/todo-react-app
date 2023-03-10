@@ -1,0 +1,25 @@
+.nav-item{
+   border: 1px solid transparent;
+   transition: all 100ms ease-in;
+   display: flex;
+   align-items: center;
+   gap: 1rem;
+   padding: 0.2rem 0.5rem;
+}
+
+.nav-item:hover{
+cursor: pointer;
+border: 1px solid hsl(0, 0%, 82%);
+border-radius: 0.5rem;
+background-color: #FFDDD2;
+}
+
+.nav-item:active{
+   background-color: #E29578
+}
+
+.nav-item.active{
+   border: 1px solid hsl(0, 0%, 82%);
+   border-radius: 0.5rem;
+   background-color: #E29578
+}
